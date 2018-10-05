@@ -21,7 +21,12 @@ The Alma Bib API will be used. https://developers.exlibrisgroup.com/alma/apis/bi
 - Add your api key to `local.prop`
 
 ### Pre-requisites (Docker)
+This application has been published to Docker Hub.  
+- https://hub.docker.com/r/terrywbrady/alma-inventory/
+
 Install [Docker for Windows or MacOS](https://www.docker.com/get-started) to test this process.
+
+Clone this repository to your desktop and follow the instructions below to configure the application with your Alma credentials.
 
 From a terminal window
 - cd to the directory containing these files
