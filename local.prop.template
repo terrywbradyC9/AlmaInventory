@@ -1,0 +1,3 @@
+;Alma API
+ALMA_SERVICE=https://api-eu.hosted.exlibrisgroup.com/almaws/v1/
+ALMA_APIKEY=

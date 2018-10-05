@@ -1,0 +1,84 @@
+th.wide {width: 200px;}
+th.action, td.action {width: 100px; text-align: center;}
+th.action button, td.action button {margin: 2px;}
+#restable tr:nth-child(odd) {
+  background-color:  #EEE;
+}
+tr.current td, tr.current th {
+  font-weight: bold;
+}
+tr.processing td, tr.processing button, tr.processing th {
+  font-weight: bold;
+}
+#gsheetdiv a {
+  border: thin solid red;
+  padding: 5px 10px;
+  margin: 5px 10px;
+  color: red;
+  display: inline-block;
+}
+#dialog-msg {
+  display: none;
+}
+#dialog-form {
+  text-align: center;
+}
+#message {
+  color: red;
+  font-weight: bold;
+}
+
+button.lastbutt:hover, button.lastbutt:focus {
+  background-color: yellow;
+}
+button.lastbutt b {
+  size: large;
+}
+#lastbarcode,#laststatus {
+  font-weight: bold;
+}
+button.rescan {
+  vertical-align: bottom;
+  list-style-position: inherit;
+}
+#legend {
+  width: 100%;
+}
+
+#legend .legnick, #legend .legstat, #legend .legdesc {
+  font-size: small;
+}
+#legend .legnick, #legend .legstat {
+  width: 10%;
+}
+#legend .legdesc {
+  width: 80%;
+}
+
+th.lcsort, td.lcsort {
+  width: 100px;
+  word-break: break-all;
+  font-size: xx-small;
+}
+
+td.lcequal {
+  color: blue;
+}
+td.lcprev {
+  color: red;
+}
+table {border-collapse: collapse;border-right:solid thin black;}
+table td, table th {border: thin solid black; padding: 4px;}
+tr.header {background-color: #EEEEEE;}
+tr.focus {background-color: yellow;}
+//tr.odd {border-bottom: solid navy thick;}
+//tr.even {border-bottom: solid gray thick;}
+tr.even td {border-bottom: thin dotted black;}
+tr.odd td {border-top: thin dotted black;}
+td.even {background-color: #EEFFEE;}
+td.head {background-color: #EEEEFF;}
+td.num {text-align: right;}
+td, th {width: 100px;}
+td.error {color: red;background-color: yellow;}
+td.title, th.title {width: 300px;}
+td.mod, th.mod {width: 200px;}

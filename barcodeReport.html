@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+Barcode Scanning Inventory Form
+
+Dependencies
+  1. JQuery UI Dialog:https://jqueryui.com/dialog/
+  2. A web service that returns data from the Alma API based on a Barcode: https://github.com/Georgetown-University-Libraries/BarcodeInventory
+  3. A Google Apps Web Service that converts CSV data into a Google Sheet: https://github.com/Georgetown-University-Libraries/PlainTextCSV_GoogleAppsScript
+
+Author: Terry Brady, Georgetown University Libraries
+-->
+<html>
+<head>
+<script	src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css"></link>
+<link rel="stylesheet" type="text/css" href="barcode.css"/>
+<!--http://www.w3schools.com/w3css/w3css_icons.asp-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script type="text/javascript" src="gsheet.js"></script>
+<script type="text/javascript" src="barcode.js"></script>
+<script type="text/javascript" src="locCallClass.js"></script>
+</head>
+<body>
+<input id="test" type="hidden"/>
+<input id="mode" type="hidden"/>
+<input id="user" type="hidden"/>
+<div id="dialog-msg"></div>
+<div id="legend-div"></div>
+<div id="dialog-form" title="Add Barcode">
+  <fieldset>
+  <label>Last barcode scanned:</label>
+  <span id="lastbarcode"></span>
+  <span id="laststatus"></span>
+  <h2 id="bcCall">Call Number</h2>
+  <h4 id="bcTitle">Title</h4>
+  <h2 id="bcVol">Volume</h2>
+  <div>
+    <button class="lastbutt" accesskey="c" status="META-CALL" status_msg="Bad Call Number">Bad <b>C</b>all Num</button>
+    <button class="lastbutt" accesskey="t" status="META-TTL" status_msg="Bad Title">Bad <b>T</b>itle</button>
+    <button class="lastbutt" accesskey="v" status="META-VOL" status_msg="Bad Volume">Bad <b>V</b>olume</button>
+    <button class="lastbutt" accesskey="m" status="PULL-MULT" status_msg="Multiple Issues"><b>M</b>ultiple Issues</button>
+    <button class="rescan"><i class='material-icons'>refresh</i></button>
+  </div>
+  </fieldset>
+  <hr/>
+  <p class="validateTips" id="message">Scan the next barcode.</p>
+  <form>
+    <fieldset>
+      <label for="name">Barcode</label>
+      <input type="text" name="barcode" id="barcode" value="" class="text ui-widget-content ui-corner-all">
+      <button id="doBulk" title="Bulk Add Barcodes by Copy/Paste" type="button">...</button>
+
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</div>
+<div id="dialog-bulk" title="Bulk Add Barcodes">
+  <fieldset>
+  <form>
+    <div><label for="name">Barcode List</label></div>
+    <textarea name="barcodes" id="barcodes" rows="10" cols="16"></textarea>
+  </form>
+  </fieldset>
+</div>
+
+<div id="main">
+  <span id='gsheetdiv'>
+    <a id='legend-button' href="#">Legend</a>
+    <a id="addb" href="#">Add Barcode</a>
+    <a id="exportGsheet" href="#">End Session - Export to Google Sheet</a>
+  </span>
+<div>
+<table id='restable'>
+<tr class='header'>
+<th class='action noexport'/>
+<th class='role'>Barcode</th>
+<th class='role'>Location Code</th>
+<th class='role wide'>Call Number</th>
+<th class='role'>Volume</th>
+<th class='role wide'>Title</th>
+<th class='role'>Process</th>
+<th class='role'>Temp Location</th>
+<th class='role'>Requested</th>
+<th class='role'>Base Status</th>
+<th class='role'>Bib supp</th>
+<th class='role'>Hold supp</th>
+<th class='role'>Record Num</th>
+<th class='role'>Status</th>
+<th class='role wide'>Status Note</th>
+<th class='role'>Timestamp</th>
+</tr>
+</table>
+</div>
+
+</div>
+</body>
+</html>
