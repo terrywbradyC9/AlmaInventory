@@ -1,2 +1,6 @@
 local.prop
 gsheet.prop.json
+local.prop
+gsheet.prop.json
+node_modules
+npm-debug.log

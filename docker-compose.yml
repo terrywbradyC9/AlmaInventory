@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   alma-inventory:
-    image: terrywbrady/alma-inventory
+    image: terrywbrady/alma-inventory-node
     ports:
       - 80:80
     volumes:

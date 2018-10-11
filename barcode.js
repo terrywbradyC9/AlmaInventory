@@ -29,6 +29,8 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
 */
 
+//barcode.init.js will set API_REDIRECT
+
 //Create the GSheet Object using a local property file
 //This file contains the name of the web service that will be used to create a Google Sheet
 var gsheet = new GSheet("gsheet.prop.json");
@@ -47,7 +49,6 @@ var testArr = [];
 var sr=1;
 
 //Other colors Anna has: kelly green, grey, goldenrod
-var API_REDIRECT = "barcodeReportRedirect.php";
 var STAT_FAIL = "FAIL";
 var COLORMAP = [
   {status: "PASS",       color: "white",        nickname: "white",           desc: "Information is valid.  No action required."},

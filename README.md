@@ -9,6 +9,10 @@ This code will facilitate an inventory of items cataloged in the Alma integrated
 - Results are displayed in a table with common errors highlighted
 - Optionally, the user can upload results of a scanning session to Google sheets
 
+## Docker Build Options
+- `docker build -t terrywbrady/alma-inventory-php -f Dockerfile.php .`
+- `docker build -t terrywbrady/alma-inventory-node -f Dockerfile.node .`
+
 ## Pre-requisites
 
 ### Pre-requisites (Alma)
