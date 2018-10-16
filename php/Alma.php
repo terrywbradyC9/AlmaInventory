@@ -17,11 +17,7 @@ class Alma {
       $apipath = $param["apipath"];
       unset($param["apipath"]);
       $param["apikey"] = $this->getApiKey();
-      if (substr($apipath,0,6) == "https:") {
-        $url = $apipath . "?" . http_build_query($param);
-      } else {
-        $url = "{$apipath}?" . http_build_query($param);
-      }
+      $url = "{$apipath}?" . http_build_query($param);
       $ch = curl_init();
 
       curl_setopt($ch, CURLOPT_URL,$url);
