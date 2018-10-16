@@ -12,6 +12,7 @@ This code will facilitate an inventory of items cataloged in the Alma integrated
 ## Docker Build Options
 - `docker build -t terrywbrady/alma-inventory-php -f Dockerfile.php .`
 - `docker build -t terrywbrady/alma-inventory-node -f Dockerfile.node .`
+- `docker build -t terrywbrady/alma-inventory-jetty -f Dockerfile.jetty .`
 
 ## Pre-requisites
 
@@ -34,9 +35,15 @@ Clone this repository to your desktop and follow the instructions below to confi
 
 From a terminal window
 - cd to the directory containing these files
-- run `docker-compose up -d`
+- run docker-compose up -d to start the service you choose
+  - `docker-compose -f docker-compose.php.yml up -d`
+  - `docker-compose -f docker-compose.node.yml up -d`
+  - `docker-compose -f docker-compose.jetty.yml up -d`
   - Docker compose will pass your local.prop file to the correct location.
-- run `docker-compose down` to stop the service
+- run docker-compose down to stop the service
+  - `docker-compose -f docker-compose.php.yml down`
+  - `docker-compose -f docker-compose.node.yml down`
+  - `docker-compose -f docker-compose.jetty.yml down`
 
 Open http://localhost/barcodeReport.html to test the program.
 - Click "Add Barcode"
