@@ -7,6 +7,6 @@ services:
       - 80:80
     volumes:
       - "./local.prop:/var/data/local.prop"
-      - "./gsheet.prop.json:/var/www/html/gsheet.prop.json"
+      - "./gsheet.prop.json:/usr/src/app/gsheet.prop.json"
     tty: true
     stdin_open: true

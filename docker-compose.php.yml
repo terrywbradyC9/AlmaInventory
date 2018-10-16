@@ -1,0 +1,12 @@
+version: "3.3"
+
+services:
+  alma-inventory:
+    image: terrywbrady/alma-inventory-php
+    ports:
+      - 80:80
+    volumes:
+      - "./local.prop:/var/data/local.prop"
+      - "./gsheet.prop.json:/var/www/html/gsheet.prop.json"
+    tty: true
+    stdin_open: true

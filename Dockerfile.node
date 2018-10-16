@@ -10,6 +10,7 @@ COPY . /usr/src/app/
 COPY node/barcode.init.js /usr/src/app/
 COPY node/redirect.js /usr/src/app/
 COPY node/package*.json ./
+COPY gsheet.prop.json.template ./gsheet.prop.json
 
 RUN npm install
 RUN npm install request

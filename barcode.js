@@ -650,7 +650,7 @@ function processCodes(show) {
   }
 
   //Call the web service to get data for the barcode
-  var url = API_REDIRECT + "?apipath=items&item_barcode="+barcode;
+  var url = API_REDIRECT + "?apipath="+encodeURIComponent(API_SERVICE)+"items&item_barcode="+barcode;
   $.getJSON(url, function(rawdata){
     var data = parseResponse(getBarcodeFromUrl(this.url), rawdata);
     var resbarcode = data["barcode"];

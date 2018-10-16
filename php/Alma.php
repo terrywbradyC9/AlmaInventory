@@ -5,7 +5,6 @@ class Alma {
       $configpath = parse_ini_file ("Alma.prop", false);
       $proppath = $configpath["proppath"];
       $sconfig = parse_ini_file ($proppath, false);
-      $this->alma_service = $sconfig["ALMA_SERVICE"];
       $this->alma_apikey = $sconfig["ALMA_APIKEY"];
 	}
 
@@ -21,7 +20,7 @@ class Alma {
       if (substr($apipath,0,6) == "https:") {
         $url = $apipath . "?" . http_build_query($param);
       } else {
-        $url = "{$this->alma_service}{$apipath}?" . http_build_query($param);
+        $url = "{$apipath}?" . http_build_query($param);
       }
       $ch = curl_init();
 
