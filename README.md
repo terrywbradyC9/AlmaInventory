@@ -60,8 +60,3 @@ Deploy a web service in Google Drive to save CSV data into a Google Drive Folder
 Restart the docker service `docker-compose restart` to refresh the resources.
 - View http://localhost/gsheet.prop.json to verify that your changes are in place.
 - Clear your cache and refresh the file if needed
-
-## Deploying for production use
-The assets in this folder can be deployed with a PHP server that you run in production.
-
-If you do not run PHP, the logic contained in Alma.php and barcodeReportRedirect.php should be fairly simple to migrate to Node.js or some other web service framework.
