@@ -1,9 +1,10 @@
-<%@page language="java" contentType="application/json;charset=UTF-8" %>
+<%@ page language="java" contentType="application/json;charset=UTF-8" %>
 <%@ page import="java.util.Scanner,java.io.File,java.util.Map,java.util.HashMap,java.util.Enumeration" %>
 <%@ page import="java.net.URL,java.io.BufferedReader,java.io.InputStreamReader,java.net.URLConnection" %>
+<%@ include file="prop.jsp" %>
 <%
   String APIKEY="";
-  try(Scanner scan = new Scanner(new File("/tmp/local.prop"))){
+  try(Scanner scan = new Scanner(new File(proppath))){
     while(scan.hasNext()) {
       String s = scan.next();
       if (s.startsWith("ALMA_APIKEY=")) {

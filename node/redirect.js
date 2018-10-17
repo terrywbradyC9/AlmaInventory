@@ -2,11 +2,12 @@
 
 const express = require('express');
 const fs = require('fs');
+var prop = require('./prop');
 
 var APIKEY="";
 var regex = /^ALMA_APIKEY=(\S+)\s*$/;
 var lineReader = require('readline').createInterface({
-  input: require('fs').createReadStream('/var/data/local.prop')
+  input: require('fs').createReadStream(prop.proppath)
 })
   .on("line", function(line){
     var match = regex.exec(line);

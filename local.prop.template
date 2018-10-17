@@ -1,3 +1,2 @@
-;Alma API
-ALMA_SERVICE=https://api-eu.hosted.exlibrisgroup.com/almaws/v1/
+;Alma APIKEY.  Add your api key here and save this to a location that is not web-accessible.
 ALMA_APIKEY=

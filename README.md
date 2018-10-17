@@ -23,6 +23,8 @@ The Alma Bib API will be used. https://developers.exlibrisgroup.com/alma/apis/bi
 - Obtain a login for the Alma Developer Network
 - Create a Read-only API key for the Bib API
 - Copy `local.prop.template` to `local.prop`
+  - For production deployment, save this file to a location that is not web accessible.
+  - The path to this file is set in a separate property file.
 - Add your api key to `local.prop`
 
 ### Pre-requisites (Docker)
@@ -60,3 +62,16 @@ Deploy a web service in Google Drive to save CSV data into a Google Drive Folder
 Restart the docker service `docker-compose restart` to refresh the resources.
 - View http://localhost/gsheet.prop.json to verify that your changes are in place.
 - Clear your cache and refresh the file if needed
+
+## Configuration Files
+
+| Purpose | Server Type | Default File Location | Note |
+| ------- | ----------- | --------------------- | ---- |
+| Store Alma API Key | All | /var/data/local.prop |This file should not be web accessible|
+| Set path to local.prop | Jetty | jetty/prop.jsp | JSP code file|
+| | Node.js| node/prop.js | Node.js code file |
+| | PHP | php/Alma.prop | PHP prop file format |
+| Set client side properties | All | */barcode.init.js | Alma API URL is set for all instances |
+| | Jetty | jetty/barcode.init.js | Alma requests are pre-processed by inventory/redirect.jsp|
+| | Node.js | node/barcode.init.js | Alma requests are pre-processed by redirect.js |
+| | PHP | php/barcode.init.js | Alma requests are pre-processed by barcodeReportRedirect.php |
