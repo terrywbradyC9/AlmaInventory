@@ -29,7 +29,9 @@ The Alma Bib API will be used. https://developers.exlibrisgroup.com/alma/apis/bi
 
 ### Pre-requisites (Docker)
 This application has been published to Docker Hub.  
-- https://hub.docker.com/r/terrywbrady/alma-inventory/
+- https://hub.docker.com/r/terrywbrady/alma-inventory-php
+- https://hub.docker.com/r/terrywbrady/alma-inventory-node
+- https://hub.docker.com/r/terrywbrady/alma-inventory-jetty
 
 Install [Docker for Windows or MacOS](https://www.docker.com/get-started) to test this process.
 
