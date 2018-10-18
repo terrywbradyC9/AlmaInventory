@@ -9,10 +9,16 @@ This code will facilitate an inventory of items cataloged in the Alma integrated
 - Results are displayed in a table with common errors highlighted
 - Optionally, the user can upload results of a scanning session to Google sheets
 
+
 ## Docker Build Options
 - `docker build -t terrywbrady/alma-inventory-php -f Dockerfile.php .`
 - `docker build -t terrywbrady/alma-inventory-node -f Dockerfile.node .`
 - `docker build -t terrywbrady/alma-inventory-jetty -f Dockerfile.jetty .`
+
+### This system is under development
+This is a migration of a solution originally developed for the Sierra ILS.  
+
+See https://github.com/Georgetown-University-Libraries/BarcodeInventory for a demonstration video.
 
 ## Pre-requisites
 
