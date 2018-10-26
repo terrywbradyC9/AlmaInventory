@@ -83,3 +83,4 @@ Restart the docker service `docker-compose restart` to refresh the resources.
 | | Jetty | jetty/barcode.init.js | Alma requests are pre-processed by inventory/redirect.jsp|
 | | Node.js | node/barcode.init.js | Alma requests are pre-processed by redirect.js |
 | | PHP | php/barcode.init.js | Alma requests are pre-processed by barcodeReportRedirect.php |
+| Set Google Drive Upload Properties | All | gsheet.prop.json | Save gsheet.prop.json.template to gsheet.prop.json note that these values will be visible to the client app.|
