@@ -602,7 +602,7 @@ function parseResponse(barcode, json) {
 
     if (!LOC_REGEX.test(loc)) {
       status = (status == "PASS") ? "PULL-LOC" : "PULL-MULT";
-      status_msg += "Invalide Location. ";
+      status_msg += "Invalid Location. ";
     }
 
     if (process == "LOAN") {
