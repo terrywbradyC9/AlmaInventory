@@ -29,7 +29,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
 */
 
-//barcode.init.js will set API_REDIRECT
+//barcode.init.js will set API_REDIRECT, API_SERVICE, LOC_REGEX
 
 //Create the GSheet Object using a local property file
 //This file contains the name of the web service that will be used to create a Google Sheet
@@ -600,9 +600,9 @@ function parseResponse(barcode, json) {
       status_msg = "Empty call number. ";
     }
 
-    if (loc != "stx") {
+    if (!LOC_REGEX.test(loc)) {
       status = (status == "PASS") ? "PULL-LOC" : "PULL-MULT";
-      status_msg += "Location is not stx. ";
+      status_msg += "Invalide Location. ";
     }
 
     if (process == "LOAN") {
