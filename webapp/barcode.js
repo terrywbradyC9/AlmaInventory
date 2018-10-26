@@ -60,7 +60,7 @@ var COLORMAP = [
   {status: "PULL-STAT",  color: "goldenrod",    nickname: "goldenrod",       desc: "Incorrect status code. Attach flag and pull item.  Send to Access Services for correction."},
   {status: "PULL-LOC",   color: "yellow",       nickname: "yellow",          desc: "Incorrect location. Attach flag and pull item.  Send to Access Services for correction."},
   {status: "PULL-SUPP",  color: "tan",          nickname: "tan",             desc: "Bib is marked as suppressed. Attach flag and pull item.  Send to Access Services for correction."},
-  {status: "PULL-ICODE", color: "violet",       nickname: "purple",          desc: "ICode is incorrect. Attach flag and pull item.  Send to Access Services for correction."},
+  {status: "PULL-HSUPP", color: "violet",       nickname: "purple",          desc: "Holding is suppressed. Attach flag and pull item.  Send to Access Services for correction."},
   {status: "PULL-DUE",   color: "chartreuse",   nickname: "electric green",  desc: "Item is checked out in ALma. Attach flag and pull item.  Send to Access Services for correction."},
   {status: "PULL-MULT",  color: "grey",         nickname: "grey",            desc: "Multiple issues. Attach flags and pull item.  Send to Access Services for correction."},
 ];
@@ -408,8 +408,6 @@ function addBarcode(barcode, show) {
   tr.append($("<td class='title'/>"));
   tr.append($("<td class='process'/>"));
   tr.append($("<td class='temp_location'/>"));
-  tr.append($("<td class='requested'/>"));
-  tr.append($("<td class='base_status'/>"));
   tr.append($("<td class='bib_supp'/>"));
   tr.append($("<td class='hold_supp'/>"));
   tr.append($("<td class='record_num'/>"));
@@ -451,7 +449,7 @@ function getButtonCell() {
 
 function restoreRow(rowarr) {
     if (rowarr == null) return;
-    if (rowarr.length != 14) return;
+    if (rowarr.length != 12) return;
 
     var barcode = rowarr.shift();
     var tr = getNewRow(false, barcode);
@@ -462,8 +460,6 @@ function restoreRow(rowarr) {
     tr.append($("<td class='title'>" + rowarr.shift() + "</td>"));
     tr.append($("<td class='process'>" + rowarr.shift() + "</td>"));
     tr.append($("<td class='temp_location'>" + rowarr.shift() + "</td>"));
-    tr.append($("<td class='requested'>" + rowarr.shift() + "</td>"));
-    tr.append($("<td class='base_status'>" + rowarr.shift() + "</td>"));
     tr.append($("<td class='bib_supp'>" + rowarr.shift() + "</td>"));
     tr.append($("<td class='hold_supp'>" + rowarr.shift() + "</td>"));
     tr.append($("<td class='record_num'>" + rowarr.shift() + "</td>"));
@@ -507,21 +503,44 @@ function setRowStatus(tr, status, status_msg, show) {
   if (show) barcodeDialog();
 }
 
+function updateRowStat(tr) {
+  if (!(tr.hasClass("bib_check") && tr.hasClass("hold_check"))) {
+    //wait for the status to be set on the other field
+    return;
+  }
+
+  var stat = tr.find("td.status").text();
+  var statmsg = tr.find("td.status_msg").text();
+  if (tr.hasClass("bib_supp")) {
+    statmsg += "Bib suppressed. ";
+    stat = (stat == "PASS") ? "PULL-SUPP" : "PULL-MULT";
+  } else if (tr.hasClass("hold_supp")) {
+    statmsg += "Holding suppressed. ";
+    stat = (stat == "PASS") ? "PULL-HSUPP" : "PULL-MULT";
+  } else {
+    return;
+  }
+  setRowStatus(tr, stat, statmsg, false);
+}
+
+
 function getBarcodeFromUrl(url) {
   var match = /.*item_barcode=(\d+)$/.exec(url);
   return (match.length > 1) ? match[1] : "";
 }
 
 function getArray(json, name) {
+  if (json == null) return {};
   return (name in json) ? json[name] : {};
 }
 
 function getValueWithDef(json, name, def) {
+  if (json == null) return def;
   return (name in json) ? json[name] : def;
 }
 
 function getValue(json, name) {
-  return (name in json) ? json[name] : "";
+  return getValueWithDef(json, name, "");
 }
 
 function getArrayValue(json, aname, vname) {
@@ -529,13 +548,14 @@ function getArrayValue(json, aname, vname) {
 }
 
 function getArrayValueWithDef(json, aname, vname, def) {
+  if (json == null) return def;
   return getValueWithDef(getArray(json, aname), vname, def);
 }
 
 function parseResponse(barcode, json) {
   var resdata = {}
   if ('errorsExist' in json) {
-    var status = "NOT_FOUND";
+    var status = "NOT-FOUND";
     var status_msg = "--";
     var errorList = getArray(json, "errorList");
     var errorArr = ('error' in errorList) ? errorList["error"] : [];
@@ -559,10 +579,12 @@ function parseResponse(barcode, json) {
     var holdingLink = getValue(holdingData, "link");
     var itemData = getArray(json, "item_data");
     var loc = getArrayValue(itemData, "location", "value");
-    var tempLoc = getArrayValue(holdingData, "temp_location", "value");
-    var base = getArrayValue(itemData, "base_status", "value");
-    var requested = getValue(itemData, "requested");
-    var process = getArrayValue(itemData, "process_type", "value");
+    var tempLoc = getArrayValue(holdingData, "temp_location", "");
+    //var base = getArrayValue(itemData, "base_status", "value");
+    //var requested = getValue(itemData, "requested");
+    var process = getArrayValue(itemData, "process_type", "value")
+        .replace(/_/," ")
+        .replace(/WORK ORDER.*/,"Work Order");
     var date = new Date();
     var m = date.getMonth() + 1;
     var timestamp = date.getFullYear()+"-"+
@@ -571,6 +593,12 @@ function parseResponse(barcode, json) {
       ((date.getHours() < 10) ? "0" + date.getHours() : date.getHours()) + ":" +
       ((date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes()) + ":" +
       ((date.getSeconds() < 10) ? "0" + date.getSeconds() : date.getSeconds());
+
+    var callno = getValue(holdingData, "call_number");
+    if (callno == "") {
+      status = "META-CALL";
+      status_msg = "Empty call number. ";
+    }
 
     if (loc != "stx") {
       status = (status == "PASS") ? "PULL-LOC" : "PULL-MULT";
@@ -585,21 +613,13 @@ function parseResponse(barcode, json) {
         status = (status == "PASS") ? "PULL-STAT" : "PULL-MULT";
         status_msg += "Item has a process status. ";
       }
-      if (base != "1") {
-        status = (status == "PASS" || status == "PULL-STAT") ? "PULL-STAT" : "PULL-MULT";
-        status_msg += "Item is not in place (base). ";
-      }
-    }
-
-    if (requested == "true") {
-      status = (status == "PASS" || status == "PULL-STAT") ? "PULL-STAT" : "PULL-MULT";
-      status_msg += "Item has been requested. ";
     }
 
     if (tempLoc != "") {
-      status = (status == "PASS" || status == "PULL-STAT") ? "PULL-STAT" : "PULL-MULT";
+      status = (status == "PASS" || status == "PULL-LOC") ? "PULL-LOC" : "PULL-MULT";
       status_msg += "Item has a temp location. ";
     }
+
 
     resdata = {
       "barcode"       : barcode,
@@ -609,10 +629,8 @@ function parseResponse(barcode, json) {
       "location_code" : loc,
       "process"       : process,
       "temp_location" : tempLoc,
-      "requested"     : requested,
-      "base_status"   : base,
       "volume"        : getValue(itemData, "description"),
-      "call_number"   : getValue(holdingData, "call_number"),
+      "call_number"   : callno,
       "title"         : getValue(bibData, "title"),
       "bibLink"       : bibLink,
       "holdingLink"   : holdingLink,
@@ -671,14 +689,20 @@ function processCodes(show) {
       if ((getValue(data, "suppress_from_publishing") == "true")) {
         $("tr[bib_id=" + data["mms_id"] + "] td.bib_supp")
           .text("X");
+        tr.addClass("bib_supp");
       }
+      tr.addClass("bib_check");
+      updateRowStat(tr);
     });
     url = API_REDIRECT + "?apipath=" + encodeURIComponent(data["holdingLink"]);
     $.getJSON(url, function(data){
       if ((getValue(data, "suppress_from_publishing") == "true")) {
         $("tr[holding_id=" + data["holding_id"] + "] td.hold_supp")
           .text("X");
+        tr.addClass("hold_supp");
       }
+      tr.addClass("hold_check");
+      updateRowStat(tr);
     });
     setLcSortStat(tr);
 
