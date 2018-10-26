@@ -80,6 +80,7 @@ Restart the docker service `docker-compose restart` to refresh the resources.
 | | Node.js| node/prop.js | Node.js code file |
 | | PHP | php/Alma.prop | PHP prop file format |
 | Set client side properties | All | */barcode.init.js | Alma API URL is set for all instances |
+| | All | */barcode.init.js | Location validation regular expression set |
 | | Jetty | jetty/barcode.init.js | Alma requests are pre-processed by inventory/redirect.jsp|
 | | Node.js | node/barcode.init.js | Alma requests are pre-processed by redirect.js |
 | | PHP | php/barcode.init.js | Alma requests are pre-processed by barcodeReportRedirect.php |
