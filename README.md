@@ -9,17 +9,6 @@ This code will facilitate an inventory of items cataloged in the Alma integrated
 - Results are displayed in a table with common errors highlighted
 - Optionally, the user can upload results of a scanning session to Google sheets
 
-
-## Docker Build Options
-- `docker build -t terrywbrady/alma-inventory-php -f Dockerfile.php .`
-- `docker build -t terrywbrady/alma-inventory-node -f Dockerfile.node .`
-- `docker build -t terrywbrady/alma-inventory-jetty -f Dockerfile.jetty .`
-
-### This system is under development
-This is a migration of a solution originally developed for the Sierra ILS.  
-
-See https://github.com/Georgetown-University-Libraries/BarcodeInventory for a demonstration video.
-
 ## Pre-requisites
 
 ### Pre-requisites (Alma)
@@ -85,3 +74,9 @@ Restart the docker service `docker-compose restart` to refresh the resources.
 | | Node.js | node/barcode.init.js | Alma requests are pre-processed by redirect.js |
 | | PHP | php/barcode.init.js | Alma requests are pre-processed by barcodeReportRedirect.php |
 | Set Google Drive Upload Properties | All | gsheet.prop.json | Save gsheet.prop.json.template to gsheet.prop.json note that these values will be visible to the client app.|
+
+## Docker Build Options
+If you wish to build a customized instance of this Docker image, the following commands can be used.
+- `docker build -t terrywbrady/alma-inventory-php -f Dockerfile.php .`
+- `docker build -t terrywbrady/alma-inventory-node -f Dockerfile.node .`
+- `docker build -t terrywbrady/alma-inventory-jetty -f Dockerfile.jetty .`
