@@ -9,6 +9,11 @@ This code will facilitate an inventory of items cataloged in the Alma integrated
 - Results are displayed in a table with common errors highlighted
 - Optionally, the user can upload results of a scanning session to Google sheets
 
+## Demonstration Video
+This video demonstrates a barcode scanning inventory workflow developed by the Georgetown University Library.  
+
+[![Demonstration Video](https://i.ytimg.com/vi/PW_hdI65h10/hqdefault.jpg)](https://www.youtube.com/watch?v=PW_hdI65h10)
+
 ## Pre-requisites
 
 ### Pre-requisites (Alma)
