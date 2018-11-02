@@ -586,7 +586,7 @@ function parseResponse(barcode, json) {
     //var base = getArrayValue(itemData, "base_status", "value");
     //var requested = getValue(itemData, "requested");
     var process = getArrayValue(itemData, "process_type", "value")
-        .replace(/_/," ")
+        .replace(/_/g," ")
         .replace(/WORK ORDER.*/,"Work Order");
     var date = new Date();
     var m = date.getMonth() + 1;
@@ -611,9 +611,9 @@ function parseResponse(barcode, json) {
     if (process == "LOAN") {
       status = (status == "PASS") ? "PULL-DUE" : "PULL-MULT";
       status_msg += "Item is on LOAN. ";
-    } else if (process == "CLAIMED RETURN LOAN") {
+    } else if (process == "CLAIM RETURNED LOAN") {
       status = (status == "PASS") ? "PULL-DUE" : "PULL-MULT";
-      status_msg += "Item is CLAIMED_RETURN. ";
+      status_msg += "Item is CLAIM RETURNED. ";
     } else if (process == "LOST LOAN") {
       status = (status == "PASS") ? "PULL-DUE" : "PULL-MULT";
       status_msg += "Item is LOST. ";
