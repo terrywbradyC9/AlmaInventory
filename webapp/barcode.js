@@ -390,6 +390,9 @@ function refreshrow(cell) {
 
 //Add the barcode contained in the barcode text input field
 function addCurrentBarcode() {
+  $("#bcCall").text("");
+  $("#bcTitle").text("");
+  $("#bcVol").text("");
   var v = $("#barcode").val();
   addBarcode(v, true);
   $("#barcode").val("").focus();
@@ -608,6 +611,12 @@ function parseResponse(barcode, json) {
     if (process == "LOAN") {
       status = (status == "PASS") ? "PULL-DUE" : "PULL-MULT";
       status_msg += "Item is on LOAN. ";
+    } else if (process == "CLAIMED RETURN LOAN") {
+      status = (status == "PASS") ? "PULL-DUE" : "PULL-MULT";
+      status_msg += "Item is CLAIMED_RETURN. ";
+    } else if (process == "LOST LOAN") {
+      status = (status == "PASS") ? "PULL-DUE" : "PULL-MULT";
+      status_msg += "Item is LOST. ";
     } else {
       if (process != "") {
         status = (status == "PASS") ? "PULL-STAT" : "PULL-MULT";
