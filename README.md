@@ -65,6 +65,9 @@ Restart the docker service `docker-compose restart` to refresh the resources.
 - View http://localhost/gsheet.prop.json to verify that your changes are in place.
 - Clear your cache and refresh the file if needed
 
+The following code illustrates how to collect metrics for a set of inventory spreadsheets
+- [Inventory Statistics](stats/README.md)
+
 ## Configuration Files
 
 | Purpose | Server Type | Default File Location | Note |
