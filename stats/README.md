@@ -1,10 +1,10 @@
 ## Generating Stats for the Inventory Process
 
-The following process can be used to generate statistics for inventory sessions.
+The following process can be used as a sample solution for reporting metrics on the inventory process.
 
 1. Create a Google Sheet
-- Copy the header row from [InventoryStatsReporting.csv](InventoryStatsReporting.csv)
-- Embed [Code.gs](Code.gs) as a Spreadsheet script
+ - Copy the header row from [InventoryStatsReporting.csv](InventoryStatsReporting.csv)
+ - Embed [Code.gs](Code.gs) as a Spreadsheet script
 
 ![](doc1.png)
 
@@ -13,16 +13,16 @@ The following process can be used to generate statistics for inventory sessions.
 ![](doc2.png)
 
 3. Carefully review the authorization message presented by the script.  
-- Review the code to make sure that you are comfortable granting this access
+ - Review the code to make sure that you are comfortable granting this access
 
-- [](auth1.png)
+![](auth1.png)
 
-- [](auth2.png)
+![](auth2.png)
 
-3. The code will run through each folder and update stats counts
+4. The code will run through each folder and update stats counts
 
 ![](doc3.png)
 
-![](doc5.png)
+![](doc4.png)
 
 ![](doc5.png)
