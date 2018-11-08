@@ -605,7 +605,7 @@ function parseResponse(barcode, json) {
 
     if (!LOC_REGEX.test(loc)) {
       status = (status == "PASS") ? "PULL-LOC" : "PULL-MULT";
-      status_msg += "Invalid Location. ";
+      status_msg += LOC_MSG;
     }
 
     if (process == "LOAN") {
@@ -761,7 +761,7 @@ function setLcSortStat(tr) {
 
 //Check barcode validity - based on institutional barcode use
 function isValidBarcode(barcode) {
-    return /^[0-9]{14,14}$/.test(barcode);
+    return BARCODE_REGEX.test(barcode);
 }
 
 //this test is run before adding a barcode
@@ -781,7 +781,7 @@ function valBarcode() {
   if (v == null || v == "") {
     return false;
   } else if (!isValidBarcode(v)) {
-    msg.text("Enter a 14 digit barcode");
+    msg.text(BARCODE_MSG);
     return false;
   } else if (isDuplicateBarcode(v)) {
     msg.text("Duplicate barcode");
