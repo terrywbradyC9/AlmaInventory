@@ -5,6 +5,7 @@ The following process can be used as a sample solution for reporting metrics on 
 1. Create a Google Sheet
  - Copy the header row from [InventoryStatsReporting.csv](InventoryStatsReporting.csv)
  - Embed [Code.gs](Code.gs) as a Spreadsheet script
+ - Add [ByLCClass.gs](ByLCClass.gs) to the script project
 
 ![](doc1.png)
 
@@ -26,3 +27,7 @@ The following process can be used as a sample solution for reporting metrics on 
 ![](doc4.png)
 
 ![](doc5.png)
+
+5. If you wish to calculate stats by LC Class, add a worksheet named "ByCallNum"
+
+![](lcstat1.png)
