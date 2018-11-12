@@ -48,7 +48,7 @@ var RECCOL = 4;   //Count of the number of records counted from each file
 var COMPCOL = 5;  //Starting index for the computed column values
 
 var LCRECCOL = 2;  //Count of the number of records counted from each file
-var LCCOMPCOL = 3;  //Starting index for the computed column values
+var LCCOMPCOL = 2;  //Starting index for the computed column values
 
 //Column numbers from inventory files - verify these columns to determine if a file is an inventory file
 var FILE_STAT_COL = 11;   //Status column
@@ -83,7 +83,7 @@ function increment(colstats, cols, stat) {
       var index = colstats[OTHER];
       cols[index]++;
     }
-    Logger.log(stat);
+    Logger.log("Unexpected Stat: "+stat);
   }
 }
 
@@ -117,7 +117,6 @@ function writeLcStats(lcsheet, lcmap) {
     arr.push(lcmap[keys[i]]);
   }
   if (arr.length == 0) return;
-  Logger.log(arr.length+"x"+arr[0].length);
   lcsheet.insertRows(2, arr.length);
   var range = lcsheet.getRange(2, 1, arr.length, arr[0].length);
   range.setValues(arr);
@@ -225,7 +224,7 @@ function processFile(folderid, file, cols, lcmap) {
     //Verify that the column arrangement is as expected
     //If so, query the status field for each record
 
-    Logger.log("Processing "+ file.getName());
+    //Logger.log("Processing "+ file.getName());
     if (isheet.getLastColumn() < FILE_STAT_COL) {
       //file is ignored.  Do not treat as an error.
       Logger.log(file.getName() + " is not an inventory file");
@@ -250,7 +249,7 @@ function processFile(folderid, file, cols, lcmap) {
       cols[RECCOL]++;
       var stat = data[i][0];
       var lcclass = calldata[i][0].replace(/^([A-Z]+).*$/,"$1");
-      lcclass = (lcclass.length > 2) ? "Other" : lcclass;
+      lcclass = (lcclass.length > 3) ? "Other" : lcclass;
       increment(STATSCOLS, cols, stat);
       try {
         lcincrement(folderid, lcmap, lcclass, stat);
