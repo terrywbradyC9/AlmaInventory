@@ -503,6 +503,9 @@ function setRowStatus(tr, status, status_msg, show) {
   tr.addClass(status);
   autosave();
   processCodes(show);
+  if ($("#lastbarcode").text() == tr.attr("barcode")) {
+    $("#laststatus").text(status).removeClass().addClass(status);
+  }
   if (show) barcodeDialog();
 }
 
