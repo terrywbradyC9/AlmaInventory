@@ -91,27 +91,31 @@ function increment(colstats, cols, stat) {
 //Loop through the spreadsheets listed in the stats spreadsheet
 //If the status field is empty, attempt to process the specified folder
 function gatherStats() {
-  //Use first sheet as a driver for work to be performed
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
-  setStatusCols(sheet, STATSCOLS, COMPCOL);
+  var lock = LockService.getDocumentLock();
+  if (lock.tryLock(1)){
+    //Use first sheet as a driver for work to be performed
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+    setStatusCols(sheet, STATSCOLS, COMPCOL);
 
-  //If a ByCallNum sheet is present, determine column stats
-  var lcsheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("ByCallNum");
-  if (lcsheet != null) {
-    setStatusCols(lcsheet, LCSTATSCOLS, LCCOMPCOL)
-  }
-
-  var colcount = sheet.getLastColumn();
-  var range = sheet.getRange(1+HROWS, 1, sheet.getLastRow()-1, colcount);
-  var data = range.getValues();
-  for(var r=0; r<data.length; r++) {
-    var cols = data[r];
-    var folder = cols[FOLDERCOL];
-    var fstat = cols[STATCOL];
-    if (folder != "" && fstat=="") {
-      var rowRange = sheet.getRange(r+1+HROWS, 1,1, colcount);
-      processFolder(sheet, rowRange, lcsheet);
+    //If a ByCallNum sheet is present, determine column stats
+    var lcsheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("ByCallNum");
+    if (lcsheet != null) {
+      setStatusCols(lcsheet, LCSTATSCOLS, LCCOMPCOL)
     }
+
+    var colcount = sheet.getLastColumn();
+    var range = sheet.getRange(1+HROWS, 1, sheet.getLastRow()-1, colcount);
+    var data = range.getValues();
+    for(var r=0; r<data.length; r++) {
+      var cols = data[r];
+      var folder = cols[FOLDERCOL];
+      var fstat = cols[STATCOL];
+      if (folder != "" && fstat=="") {
+        var rowRange = sheet.getRange(r+1+HROWS, 1,1, colcount);
+        processFolder(sheet, rowRange, lcsheet);
+      }
+    }
+    lock.releaseLock();
   }
 }
 
