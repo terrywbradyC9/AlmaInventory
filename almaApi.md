@@ -19,6 +19,7 @@ On the "API Management" tab, select the Bib API.  Specify "Sandbox read-only".
 
 Test with the following link which pre-loads a handful of barcodes [known to the Alma Sandbox](https://developers.exlibrisgroup.com/blog/Sample-IDs-for-running-Alma-API-on-the-Guest-Sandbox).
 
-https://localhost/barcodeReport.html?test=18619,34303,8558-10,333213718
+- PHP/Node: http://localhost/barcodeReport.html?test=333213718,18619,8558-10,34303,99999
+- Jetty: http://localhost/inventory/barcodeReport.html?test=333213718,18619,8558-10,34303,99999
 
 When barcodes have been pre-loaded in this manner, press Alt-S to simulate performing a barcode scan.

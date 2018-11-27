@@ -87,7 +87,7 @@ function colorInit() {
 }
 
 function getTestCodes(){
-  var re = /.*test=([\d,]+)(&.*)?$/;
+  var re = /.*test=([0-9\-,]+)(&.*)?$/;
   if (re.test(document.location.search)) {
     var m = re.exec(document.location.search);
     if (m.length > 1) {
@@ -531,7 +531,7 @@ function updateRowStat(tr) {
 
 
 function getBarcodeFromUrl(url) {
-  var match = /.*item_barcode=(\d+)$/.exec(url);
+  var match = /.*item_barcode=([0-9\-]+)$/.exec(url);
   return (match.length > 1) ? match[1] : "";
 }
 

@@ -2,7 +2,7 @@ var API_SERVICE = "https://api-eu.hosted.exlibrisgroup.com/almaws/v1/";
 var API_REDIRECT = "redirect.js";
 
 //Location validation Regular Expression
-var LOC_REGEX = /^stx$/;
+var LOC_REGEX = /^main$/;
 
 //Location format message
 var LOC_MSG = "Invalid Location";
