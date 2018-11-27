@@ -22,6 +22,7 @@ The Alma Bib API will be used. https://developers.exlibrisgroup.com/alma/apis/bi
 
 - Obtain a login for the Alma Developer Network
 - Create a Read-only API key for the Bib API
+  - If you do not have an institutional instance, you can [test the application using the Alma Sandbox](almaApi.md)
 - Copy `local.prop.template` to `local.prop`
   - For production deployment, save this file to a location that is not web accessible.
   - The path to this file is set in a separate property file.
