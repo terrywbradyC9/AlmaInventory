@@ -8,7 +8,7 @@ var LOC_REGEX = /^stx$/;
 var LOC_MSG = "Invalid Location";
 
 //Barcode validation Regular expression
-var BARCODE_REGEX = /^[0-9]{14,14}$/;
+var BARCODE_REGEX = /^[0-9\-]{5,14}$/;
 
 //Barcode Format message
-var BARCODE_MSG = "Enter a 14 digit barcode";
+var BARCODE_MSG = "Enter a 5-14 digit barcode containing only numbers and dashes";
