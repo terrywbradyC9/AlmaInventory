@@ -214,14 +214,6 @@ function bindEvents() {
     var ssname = makeSpreadsheetName();
     var nodes = $("#restable tr");
     var buf = ssname + "\n" + $("#user").val() + "\n" + gsheet.makeCsv(nodes);
-    /*
-    $.ajax({
-      type: "PUT",
-      url: "barcodeReportLog.php",
-      dataType: "text",
-      data: buf
-    })
-    */
 
     gsheet.gsheet(nodes, ssname, folderid);
     var msg = $("<div>Please confirm that <b>"+cnt+"</b> barcodes were successfully exported and saved to Google sheets.Click <b>OK</b> delete those barcodes from this page.</div>");

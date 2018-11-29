@@ -41,25 +41,21 @@ var GSheet = function(proppath) {
     }
 
     this.gsheet = function(rows, name, folderid) {
-        var form = $("<form/>");
-        $(this.INSERTID).append(form);
-        form.hide();
-        form.attr("target", "_blank")
-        form.attr("method", "POST");
-        form.attr("action", this.props.service);
-        var input = $("<textarea rows='10' cols='100'/>");
-        input.attr("name","data");
-        input.val(this.makeCsv(rows));
-        form.append(input);
-        input = $("<input type='text' name='name'/>");
-        input.val(name);
-        form.append(input);
-        input = $("<input type='text' name='folderid'/>");
-        input.val(folderid);
-        form.append(input);
-        input = $("<input type='submit'/>");
-        form.append(input);
-        form.submit();
+        $.ajax({
+          url: this.props.service,
+          method: 'POST',
+          data: {
+            data: this.makeCsv(rows),
+            name: name,
+            folderid: folderid
+          },
+          success: function(data) {
+            alert(data);
+          },
+          error: function(data) {
+            alert(data.statusText);
+          }
+        });
     }
 
     //this is meant to be overridden for each report
