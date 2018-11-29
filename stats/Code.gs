@@ -27,6 +27,7 @@ Catch all counter for any values that do not match
  */
 
 function onOpen() {
+  return; //do not present option to user
   SpreadsheetApp.getUi()
     .createAddonMenu()
     .addItem("Gather Stats", "gatherStats")
